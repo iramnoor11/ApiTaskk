@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="main">
+        <div class="section">
+            <h1 class="head" id="heading">Creating Better Design With <br>Content First Approach</h1>
+            <p class="first-para">Paul Broska <code>.design</code> .April 9 2018</p>
+            <img src="img.jpg" alt="" class="imgg" id="show">
+            <p class="pppx" id="pg">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse quasi, sequi
+                exercitationem beatae numquam iure saepe quam nam amet delectus ex corporis voluptas velit quia!
+                Suscipit quia voluptatem quis iste nihil unde hic eius veniam deserunt, dicta corporis tempore molestiae
+                quidem temporibus fuga odio nulla fugiat provident? Nesciunt blanditiis fugit quam voluptates sequi
+                amet, cumque iste vel consequatur unde assumenda asperiores aut illo </p>
+            <button>Read more</button>
+        </div>
+        <div class="sidebar" id="sidebar">
+
+        </div>
+    </div>
+
+    <script>
+        async function addData() {
+            let response = await fetch('https://jsonplaceholder.typicode.com/posts');
+            let result = await response.json();
+            const sidebar = document.getElementById('sidebar');
+
+
+            for (let i = 0; i < 10; i++) {
+                sidebar.innerHTML += `
+                        <div class='flex' id="item-${i}" onclick="showDetails(${i})">
+                                <img src="new.jpg" alt="" srcset="" class="img" id="one-place-${i}">
+                        
+                            <div>
+                                <h3 id="one-title-${i}">${result[i].title.slice(0, 13)}</h3>
+                                <p class="paragraph" id="one-body-${i}">${result[i].body.slice(0, 40)}</p>
+                                <p class="price" id="one-price-${i}">$250</p>
+                            </div>
+                        </div>
+                    `;
+            }
+        }
+
+        function showDetails(index) {
+            const title = document.getElementById(`one-title-${index}`).innerText;
+            const body = document.getElementById(`one-body-${index}`).innerText;
+            const image_one = document.getElementById(`one-place-${index}`).src
+
+            const mainTitle = document.getElementById('heading')
+            const mainBody = document.getElementById('pg')
+            const showImage = document.getElementById('show')
+
+            mainTitle.innerText = title;
+            mainBody.innerText = body;
+            showImage.src = image_one
+        }
+
+        addData();
+    </script>
+</body>
+
+</html>
